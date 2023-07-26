@@ -7,19 +7,30 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.order.Order;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class orderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+        //AppConfig appConfig = new AppConfig();
+        //AppConfig 적용
+//        MemberService memberService = appConfig.memberService();
+//        OrderService orderService = appConfig.orderService();
+        // OCP,DIP 원칙 준수 x
+//        MemberService memberService = new MemberServiceImpl();
+//        OrderService orderService = new OrderServiceImpl();
+        // 스프링컨테이너 기반
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+        OrderService orderService = applicationContext.getBean("orderService",OrderService.class);
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA" , Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId,"itemA", 10000);
-
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
         System.out.println("order = " + order.toString());
         System.out.println("order.calculatePrice = " + order.calculatePrice());
     }
