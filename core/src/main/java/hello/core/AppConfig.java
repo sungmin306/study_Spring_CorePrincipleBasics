@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration  // 구성정보라는 의미
 public class AppConfig {
+    // 펙토리 메서드 라는 방식임 (직접 등록이 아닌) -> 뭔가 외부에서 메서드를 호출해서 하는 방식
     @Bean //스프링컨테이너에 등록
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
