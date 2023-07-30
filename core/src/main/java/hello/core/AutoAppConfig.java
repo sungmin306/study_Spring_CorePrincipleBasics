@@ -1,5 +1,12 @@
 package hello.core;
 
+import hello.core.discount.DiscountPolicy;
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import hello.core.order.OrderService;
+import hello.core.order.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -14,5 +21,17 @@ import org.springframework.context.annotation.FilterType;
         //Configuration 어노테이션 사용한 부분도 자동으로 빈으로 등록되기때문에 위 코드를 사용해서 기존에 만들었건거 등록 안되게끔 방지함
 )
 public class AutoAppConfig {
+
+//    @Autowired MemberRepository memberRepository;
+//    @Autowired DiscountPolicy discountPolicy;
+//
+//    @Bean
+//    OrderService orderService() {
+//        return new OrderServiceImpl(memberRepository, discountPolicy);
+//    }
+//    @Bean
+//    MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 
 }
